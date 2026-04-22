@@ -7,6 +7,19 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Added
+
+- **Full Claude Code plugin support in `vat claude plugin build`.** Adopters can now
+  bundle commands, hooks, agents, MCP servers, scripts, plugin-local skills, and
+  author-supplied `plugin.json` metadata from a per-plugin `plugins/<name>/` directory.
+  Skills-only configs continue to work unchanged. New schema fields: `skills` is now
+  optional, `source` (path override), and `files[]` (compiled-artifact mappings). Build
+  pipeline is deterministically ordered (discovery → tree-copy → skill copy-in →
+  `files[]` → merged `plugin.json`). YAML summary adds `commandsCopied`, `hooksCopied`,
+  `agentsCopied`, `mcpCopied` per plugin. Case-sensitivity mismatches between declared
+  plugin names and on-disk dirs now fail the build to catch Linux-CI drift.
+  (spec: `docs/designs/2026-04-22-full-plugin-support.md`)
+
 ## [0.1.33] - 2026-04-21
 
 ### Added
